@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Task Manager</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+<link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet" />
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular-resource.js"></script>
+<script src="scripts/taskController.js"></script>
+</head>
+<body>
+    <div ng-app="taskApp" ng-controller="TaskController as task">
+        <div class="container">
+            <form class="form-signin clearfix">
+                <h2 class="form-signin-heading">Add a task</h2>
+
+                <label class="sr-only" for="subject">Subject</label> <input type="text" id="subject"
+                    ng-model="task.subject" placeholder="Enter subject here" class="form-control" required autofocus />
+
+                <label class="sr-only" for="dueDate">Due Date</label> <input type="date" ng-model="task.dueDate"
+                    class="form-control" id="dueDate" placeholder="Set a due date" /> <label class="sr-only"
+                    for="priority">Priority</label> <input type="text" ng-model="task.priority" class="form-control"
+                    id="priority" placeholder="Set a priority" /> <label class="sr-only" for="durationInHours">Duration</label>
+                <input type="number" min="10" ng-model="task.durationInHours" class="form-control" id="durationInHours"
+                    placeholder="Set a duration" />
+
+                <button class="btn btn-lg btn-primary btn-block" ng-click="createTask()">Save</button>
+            </form>
+        </div>
+        <div class="container" style="max-width:400px" ng-repeat="taskItem in taskList.content">
+            <div class="row center-block">
+                <div class="col-md-4">{{taskItem.subject}}</div>
+                <div class="col-md-5">{{taskItem.dueDate | date}}</div>
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-default" ng-click="deleteTask($index)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
